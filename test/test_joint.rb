@@ -72,7 +72,7 @@ class JointTest < Test::Unit::TestCase
       Asset.attachment_accessor_module.should be_instance_of(Module)
       EmbeddedAsset.attachment_accessor_module.should be_instance_of(Module)
     end
-    
+
     context "with inheritance" do
       should "add attachment to attachment_names" do
         BaseModel.attachment_names.should == Set.new([:file])
@@ -167,7 +167,7 @@ class JointTest < Test::Unit::TestCase
       subject.save
     end
   end
-  
+
   context "Assigning new attachments to embedded document" do
     setup do
       @asset = Asset.new
@@ -284,10 +284,6 @@ class JointTest < Test::Unit::TestCase
       rewind_files
     end
     subject { @doc }
-
-#     should "not change attachment id" do
-#       subject.file_id_changed?.should be(false)
-#     end
 
     should "update keys" do
       subject.file_name.should == 'test2.txt'
@@ -428,7 +424,7 @@ class JointTest < Test::Unit::TestCase
       subject.image = nil
       subject.image.nil?.should be(true)
     end
-    
+
     should "respond with true when asked if the attachment is blank?" do
       subject.image = nil
       subject.image.blank?.should be(true)
@@ -502,7 +498,7 @@ class JointTest < Test::Unit::TestCase
       assert_grid_difference(-1) { subject._root_document.destroy }
     end
   end
-  
+
   # What about when an embedded document is removed?
 
   context "Assigning file name" do
