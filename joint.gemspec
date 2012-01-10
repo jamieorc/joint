@@ -4,7 +4,7 @@ require File.expand_path('../lib/joint/version', __FILE__)
 Gem::Specification.new do |s|
   s.name        = "jamieorc-joint"
   s.summary     = %Q{MongoMapper and GridFS joined in file upload love.}
-  s.description = %Q{MongoMapper and GridFS joined in file upload love. Updates by Jamie for EmbeddedDocument.}
+  s.description = %Q{MongoMapper and GridFS joined in file upload love. Updates by Jamie for EmbeddedDocument, IO.}
   s.email       = "jamieorc@gmail.com"
   s.homepage    = "http://github.com/jamieorc/joint"
   s.authors     = ["John Nunemaker", "Jamie Orchard-Hays"]
