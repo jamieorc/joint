@@ -22,7 +22,7 @@ module Joint
           :_id          => send(name).id,
           :filename     => send(name).name,
           :content_type => send(name).type,
-          :safe         => safe?
+          :w            => safe? ? 1 : 0
         })
       end
       assigned_attachments.clear

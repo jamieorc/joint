@@ -505,10 +505,15 @@ describe "JointTest" do
 
   describe "Assigning new attachments to a safe document" do
     it "proxies the safe setting" do
-      doc = SafeAsset.new(:image => @image, :file => @file)
+      unsafe_doc = Asset.new(:image => @image, :file => @file)
       rewind_files
-      Mongo::Grid.any_instance.expects(:put).twice.with(anything, has_entries(safe: true))
-      doc.save
+      Mongo::Grid.any_instance.expects(:put).twice.with(anything, has_entries(w: 0))
+      unsafe_doc.save
+
+      safe_doc = SafeAsset.new(:image => @image, :file => @file)
+      rewind_files
+      Mongo::Grid.any_instance.expects(:put).twice.with(anything, has_entries(w: 1))
+      safe_doc.save
     end
   end
 
