@@ -59,7 +59,7 @@ class SafeAsset < Asset
 end
 
 class CustomCollectionAsset < Asset
-  set_joint_collection 'custom'
+  set_joint_collection :custom
 end
 
 class CustomCollectionAssetSubclass < CustomCollectionAsset
