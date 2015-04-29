@@ -564,4 +564,34 @@ describe "JointTest" do
       subject.file_id.must_be_instance_of(BSON::ObjectId)
     end
   end
+
+  describe "Joint collection configuration" do
+
+    it "has default gridfs collection" do
+      Asset.joint_collection_name.must_equal 'fs'
+    end
+
+    it "has custom gridfs collection" do
+      CustomCollectionAsset.joint_collection_name.must_equal 'custom'
+    end
+
+    it "inherits custom gridfs collection" do
+      CustomCollectionAssetSubclass.joint_collection_name.must_equal 'custom'
+    end
+
+    it "saves to the default gridfs collection" do
+      assert_grid_difference(2, 'fs') do
+        Asset.create(:image => @image, :file => @file)
+        rewind_files
+      end
+    end
+
+    it "saves to the custom gridfs collection" do
+      assert_grid_difference(2, 'custom') do
+        CustomCollectionAsset.create(:image => @image, :file => @file)
+        rewind_files
+      end
+    end
+
+  end
 end

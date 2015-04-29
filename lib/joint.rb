@@ -7,8 +7,9 @@ module Joint
   extend ActiveSupport::Concern
 
   included do
-    class_attribute :attachment_names
+    class_attribute :attachment_names, :joint_collection_name
     self.attachment_names = Set.new
+    self.joint_collection_name = 'fs'
     include attachment_accessor_module
   end
 
