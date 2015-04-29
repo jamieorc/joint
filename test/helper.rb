@@ -35,12 +35,12 @@ class Minitest::Test
     assert_difference(expression, 0, message, &block)
   end
 
-  def assert_grid_difference(difference=1, &block)
-    assert_difference("MongoMapper.database['fs.files'].find().count", difference, &block)
+  def assert_grid_difference(difference=1, collection_name='fs', &block)
+    assert_difference("MongoMapper.database['#{collection_name}.files'].find().count", difference, &block)
   end
 
-  def assert_no_grid_difference(&block)
-    assert_grid_difference(0, &block)
+  def assert_no_grid_difference(collection_name = 'fs', &block)
+    assert_grid_difference(0, collection_name, &block)
   end
 end
 
@@ -56,6 +56,14 @@ end
 
 class SafeAsset < Asset
   safe
+end
+
+class CustomCollectionAsset < Asset
+  set_joint_collection 'custom'
+end
+
+class CustomCollectionAssetSubclass < CustomCollectionAsset
+  attachment :video
 end
 
 class EmbeddedAsset
@@ -91,8 +99,9 @@ module JointTestHelpers
     f
   end
 
-  def grid
-    @grid ||= Mongo::Grid.new(MongoMapper.database)
+  def grid(collection_name = 'fs')
+    @grids ||= {}
+    @grids[collection_name] ||= Mongo::Grid.new(MongoMapper.database, collection_name)
   end
 
   def key_names

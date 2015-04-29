@@ -1,5 +1,9 @@
 module Joint
   module ClassMethods
+    def set_joint_collection(name)
+      self.joint_collection_name = name
+    end
+
     def attachment_accessor_module
       @attachment_accessor_module ||= Module.new
     end

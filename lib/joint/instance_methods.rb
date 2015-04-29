@@ -1,6 +1,6 @@
 module Joint
   def grid
-    @grid ||= Mongo::Grid.new(database)
+    @grid ||= Mongo::Grid.new(database, joint_collection_name)
   end
 
   private
