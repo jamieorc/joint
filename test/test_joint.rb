@@ -54,6 +54,13 @@ describe "JointTest" do
           Video.keys.must_include("video_#{key}")
         end
       end
+
+      it "saves successfully" do
+        assert_grid_difference(2) do
+          Image.create(file: @image, image: @image2)
+          rewind_files
+        end
+      end
     end
   end
 
