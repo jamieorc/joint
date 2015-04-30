@@ -54,10 +54,6 @@ class Asset
   has_many :embedded_assets
 end
 
-class SafeAsset < Asset
-  safe
-end
-
 class CustomCollectionAsset < Asset
   set_joint_collection :custom
 end

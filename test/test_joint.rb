@@ -503,20 +503,6 @@ describe "JointTest" do
     end
   end
 
-  describe "Assigning new attachments to a safe document" do
-    it "proxies the safe setting" do
-      unsafe_doc = Asset.new(:image => @image, :file => @file)
-      rewind_files
-      Mongo::Grid.any_instance.expects(:put).twice.with(anything, has_entries(w: 0))
-      unsafe_doc.save
-
-      safe_doc = SafeAsset.new(:image => @image, :file => @file)
-      rewind_files
-      Mongo::Grid.any_instance.expects(:put).twice.with(anything, has_entries(w: 1))
-      safe_doc.save
-    end
-  end
-
   describe "Assigning joint io instance" do
     before do
       io = Joint::IO.new({
