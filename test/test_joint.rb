@@ -30,11 +30,6 @@ describe "JointTest" do
       end
     end
 
-    it "add memoized accessors module" do
-      Asset.attachment_accessor_module.must_be_instance_of(Module)
-      EmbeddedAsset.attachment_accessor_module.must_be_instance_of(Module)
-    end
-
     describe "with inheritance" do
       it "add attachment to attachment_names" do
         BaseModel.attachment_names.must_equal Set.new([:file])

@@ -5,3 +5,4 @@ gemspec
 gem 'rake'
 gem 'bson_ext', :require => false
 gem 'mocha'
+gem 'byebug'

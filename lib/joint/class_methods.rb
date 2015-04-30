@@ -4,11 +4,8 @@ module Joint
       self.joint_collection_name = name.to_s
     end
 
-    def attachment_accessor_module
-      @attachment_accessor_module ||= Module.new
-    end
-
     def attachment(name, options = {})
+      # byebug
       options.symbolize_keys!
       name = name.to_sym
 
@@ -26,7 +23,7 @@ module Joint
 
       validates_presence_of(name) if options[:required]
 
-      attachment_accessor_module.module_eval <<-EOC
+      self.class_eval <<-EOC
         def #{name}
           @#{name} ||= AttachmentProxy.new(self, :#{name})
         end

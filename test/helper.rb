@@ -1,6 +1,7 @@
 require 'bundler/setup'
 Bundler.setup(:default, 'test', 'development')
 
+require 'byebug'
 require 'tempfile'
 require 'mongo_mapper'
 
