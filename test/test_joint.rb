@@ -582,4 +582,20 @@ describe "JointTest" do
     end
 
   end
+
+  describe "Serialization" do
+    before do
+      @doc = Asset.create(:image => @image, :file => @file)
+      rewind_files
+    end
+    let(:subject) { @doc }
+
+    it "includes joint attachment keys" do
+      @doc.class.attachment_names.each do |name|
+        key_names.each do |key|
+          @doc.as_json.keys.must_include "#{name}_#{key}"
+        end
+      end
+    end
+  end
 end
