@@ -45,6 +45,11 @@ class Minitest::Test
   end
 end
 
+class Basic
+  include MongoMapper::Document
+  has_many :embedded_assets
+end
+
 class Asset
   include MongoMapper::Document
   plugin Joint

@@ -597,5 +597,21 @@ describe "JointTest" do
         end
       end
     end
+
+    describe "for embedded documents" do
+      before do
+        @doc.embedded_assets << EmbeddedAsset.new(image: @image, file: @file)
+        @doc.save!
+        rewind_files
+      end
+
+      it "includes attachment keys in embedded documents" do
+        EmbeddedAsset.attachment_names.each do |name|
+          key_names.each do |key|
+            @doc.as_json['embedded_assets'].first.keys.must_include "#{name}_#{key}"
+          end
+        end
+      end
+    end
   end
 end

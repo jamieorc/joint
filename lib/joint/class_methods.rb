@@ -5,7 +5,6 @@ module Joint
     end
 
     def attachment(name, options = {})
-      # byebug
       options.symbolize_keys!
       name = name.to_sym
 
