@@ -25,7 +25,7 @@ Also, #image and #pdf are proxies so you can do stuff like:
 If you call a method other than those in the proxy it calls it on the GridIO instance so you can still get at all the GridIO instance methods.
 
 == Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
