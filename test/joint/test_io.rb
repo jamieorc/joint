@@ -1,40 +1,38 @@
-require 'helper'
+require_relative "../helper"
 
 describe IO do
-
-  describe "#initialize" do
-    it "set attributes from hash" do
-      Joint::IO.new(:name => 'foo').name.must_equal 'foo'
+  context "#initialize" do
+    should "set attributes from hash" do
+      assert_equal 'foo', Joint::IO.new(:name => 'foo').name
     end
   end
 
-  it "default type to plain text" do
-    Joint::IO.new.type.must_equal 'plain/text'
+  should "default type to plain text" do
+    assert_equal 'plain/text', Joint::IO.new.type
   end
 
   it "default size to content size" do
     content = 'This is my content'
-    Joint::IO.new(:content => content).size.must_equal content.size
+    assert_equal content.size, Joint::IO.new(:content => content).size
   end
 
-  it "alias path to name" do
-    Joint::IO.new(:name => 'foo').path.must_equal 'foo'
+  should "alias path to name" do
+    assert_equal 'foo', Joint::IO.new(:name => 'foo').path
   end
 
-  describe "#read" do
-    it "return content" do
-      Joint::IO.new(:content => 'Testing').read.must_equal 'Testing'
+  context "#read" do
+    should "return content" do
+      assert_equal 'Testing', Joint::IO.new(:content => 'Testing').read
     end
   end
-  
-  describe "#rewind" do
-    it "rewinds the io to position 0" do
+
+  context "#rewind" do
+    should "rewinds the io to position 0" do
       io = Joint::IO.new(:content => 'Testing')
-      io.read.must_equal 'Testing'
-      io.read.must_equal ''
+      assert_equal 'Testing', io.read
+      assert_equal '', io.read
       io.rewind
-      io.read.must_equal 'Testing'
+      assert_equal 'Testing', io.read
     end
   end
-  
 end

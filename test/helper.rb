@@ -1,22 +1,22 @@
-require 'bundler/setup'
-Bundler.setup(:default, 'test', 'development')
+require "bundler/setup"
+Bundler.setup(:default, "test", "development")
 
-require 'byebug'
-require 'tempfile'
-require 'mongo_mapper'
-
-require 'minitest/spec'
-require 'minitest/autorun'
-require 'minitest/pride'
-require 'mocha/mini_test'
-
-require File.expand_path(File.dirname(__FILE__) + '/../lib/joint')
+# require 'byebug'
+require "tempfile"
+require "pp"
+require "minitest/autorun"
+require "minitest/rg"
+require "mocha/minitest"
+require "shoulda"
+require "mongo_mapper"
+require_relative "../lib/joint"
 
 MongoMapper.database = "joint_test"
 
-class Minitest::Test
-  def setup
-    MongoMapper.database.collections.each { |coll| coll.remove unless coll.name =~ /^system/ }
+class JointBaseSpec < Minitest::Spec
+  before do
+    # NOTE this from skinandbones (Blake Carlson): coll.remove unless coll.name =~ /^system/
+    MongoMapper.database.collections.each(&:delete_many)
   end
 
   def assert_difference(expression, difference = 1, message = nil, &block)
@@ -37,11 +37,12 @@ class Minitest::Test
   end
 
   def assert_grid_difference(difference=1, collection_name='fs', &block)
-    assert_difference("MongoMapper.database['#{collection_name}.files'].find().count", difference, &block)
+    assert_difference("MongoMapper.database['#{collection_name}.files'].count()", difference, &block)
   end
 
   def assert_no_grid_difference(collection_name = 'fs', &block)
-    assert_grid_difference(0, collection_name, &block)
+    # assert_grid_difference(0, collection_name, &block)
+    assert_no_difference(%Q{MongoMapper.database["#{collection_name}.files"].count()}, ">>>>> #{collection_name}.files.count() changed <<<<<", &block)
   end
 end
 
@@ -96,14 +97,14 @@ module JointTestHelpers
   end
 
   def open_file(name)
-    f = File.open(File.join(File.dirname(__FILE__), 'fixtures', name), 'r')
+    f = File.open(File.join(File.dirname(__FILE__), "fixtures", name), "r")
     f.binmode
     f
   end
 
   def grid(collection_name = 'fs')
     @grids ||= {}
-    @grids[collection_name] ||= Mongo::Grid.new(MongoMapper.database, collection_name)
+    @grids[collection_name] ||= Mongo::Grid::FSBucket.new(MongoMapper.database, fs_name: collection_name)
   end
 
   def key_names

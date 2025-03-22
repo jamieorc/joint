@@ -1,4 +1,4 @@
-require 'helper'
+require_relative "../helper"
 
 describe "FileHelpers" do
   include JointTestHelpers
@@ -16,11 +16,11 @@ describe "FileHelpers" do
       def @image.original_filename
         'frank.jpg'
       end
-      Joint::FileHelpers.name(@image).must_equal 'frank.jpg'
+      assert_equal 'frank.jpg', Joint::FileHelpers.name(@image)
     end
 
-    it "fall back to File.basename" do
-      Joint::FileHelpers.name(@image).must_equal 'mr_t.jpg'
+    should "fall back to File.basename" do
+      assert_equal 'mr_t.jpg', Joint::FileHelpers.name(@image)
     end
   end
 
@@ -29,22 +29,23 @@ describe "FileHelpers" do
       def @image.size
         25
       end
-      Joint::FileHelpers.size(@image).must_equal 25
+      assert_equal 25, Joint::FileHelpers.size(@image)
     end
 
-    it "fall back to File.size" do
-      Joint::FileHelpers.size(@image).must_equal 13661
+    should "fall back to File.size" do
+      assert_equal 13661, Joint::FileHelpers.size(@image)
     end
   end
 
   describe ".type" do
     it "return type if Joint::IO instance" do
       file = Joint::IO.new(:type => 'image/jpeg')
-      Joint::FileHelpers.type(@image).must_equal 'image/jpeg'
+
+      assert_equal 'image/jpeg', Joint::FileHelpers.type(@image)
     end
 
-    it "fall back to Wand" do
-      Joint::FileHelpers.type(@image).must_equal 'image/jpeg'
+    should "fall back to Wand" do
+      assert_equal 'image/jpeg', Joint::FileHelpers.type(@image)
     end
   end
 
