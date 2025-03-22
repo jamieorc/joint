@@ -4,8 +4,17 @@
 
 MongoMapper and GridFS joined in file upload love.
 
-## Usage
+## Updated for MongoMapper 0.15.x and Mongo Ruby driver 2.16.x
+This version brings Joint into the (near) current world of the Mongo Ruby driver
+2.x series. I've targeted MongoMapper 0.15.x and Mongo driver 2.16.x as a first
+step bridge between the old Mongo driver 1.x and more recent versions. Although
+I am not currently developing any Ruby projects using Joint, I had an itch to scratch on a very large old project that I wanted to make run on recenct
+Mongodb versions (my code was stuck on Mongodb 3.2).
 
+## Mostly Dead
+As such, this project is still *mostly dead*, but I will likely update this for newer MongoMapper and Mongo Ruby driver versions.
+
+## Usage
 Declare the plugin and use the attachment method to make attachments.
 ```ruby
 class Foo
