@@ -4,6 +4,8 @@ module Joint
   class IO
     attr_accessor :name, :content, :type, :size
 
+    alias path name
+
     def initialize(attrs={})
       attrs.each { |key, value| send("#{key}=", value) }
       @type ||= 'plain/text'
@@ -17,11 +19,13 @@ module Joint
     def read(*args)
       @io.read(*args)
     end
-    
+
     def rewind
       @io.rewind if @io.respond_to?(:rewind)
     end
 
-    alias path name
+    def eof?
+      @io.nil? ? true : @io.eof?
+    end
   end
 end

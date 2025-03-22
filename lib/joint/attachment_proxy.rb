@@ -26,11 +26,35 @@ module Joint
     alias_method :blank?, :nil?
 
     def grid_io
-      @grid_io ||= @instance.grid.get(id)
+      # grid is instance of Mongo::Grid::FSBucket
+      # open_download_stream returns Grid::FSBucket::Stream::Read
+      @grid_io ||= @instance.grid.open_download_stream(id)
     end
 
-    def method_missing(method, *args, &block)
-      grid_io.send(method, *args, &block)
+    def read
+      grid_io.read
+    end
+
+    # Grid::FSBucket::Stream::Read#file_info returns Grid::File::Info
+    def content_type
+      grid_io.file_info.content_type
+    end
+
+    def file_id
+      grid_io.file_info.id
+    end
+
+    def filename
+      grid_io.file_info.filename
+    end
+
+    def file_length
+      grid_io.file_info.length
+    end
+    alias file_size file_length
+
+    def upload_date
+      grid_io.file_info.upload_date
     end
   end
 end
