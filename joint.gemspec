@@ -10,9 +10,10 @@ Gem::Specification.new do |s|
   s.authors     = ["John Nunemaker"]
   s.version     = Joint::Version
 
-  s.add_dependency 'wand', '~> 0.4'
-  s.add_dependency 'mime-types'
-  s.add_dependency 'mongo_mapper', '~> 0.9'
+  s.add_dependency "wand", "~> 0.4"
+  s.add_dependency "mime-types"
+  s.add_dependency "mongo", "2.16.4"
+  s.add_dependency "mongo_mapper", "~> 0.15"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
