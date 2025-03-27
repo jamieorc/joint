@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "wand", "~> 0.4"
   s.add_dependency "mime-types"
-  s.add_dependency "mongo", "2.16.4"
+  s.add_dependency "mongo", "~> 2.16.4"
   s.add_dependency "mongo_mapper", "~> 0.15"
 
   s.files         = `git ls-files`.split("\n")
