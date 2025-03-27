@@ -8,8 +8,12 @@ MongoMapper and GridFS joined in file upload love.
 This version brings Joint into the (near) current world of the Mongo Ruby driver
 2.x series. I've targeted MongoMapper 0.15.x and Mongo driver 2.16.x as a first
 step bridge between the old Mongo driver 1.x and more recent versions. Although
-I am not currently developing any Ruby projects using Joint, I had an itch to scratch on a very large old project that I wanted to make run on recenct
-Mongodb versions (my code was stuck on Mongodb 3.2).
+I am not currently developing any Ruby projects using Joint, I had an itch to
+scratch on a very large old project that I wanted to make run on recenct Mongodb
+versions (my code was stuck on Mongodb 3.2).
+
+I targeted Mongo driver 2.16.x because it is compatible with Mongodb versions
+from 2.6 to 5.0 and Ruby versions from 2.4 to 3.0
 
 ## Mostly Dead
 As such, this project is still *mostly dead*, but I will likely update this for newer MongoMapper and Mongo Ruby driver versions.
@@ -46,7 +50,7 @@ driver.
 ```ruby
 content_type(), file_id(), filename(), file_length(), upload_date()
 ```
-For consistency with the `Joint` API, `file_size()` aliased to `file_length()`.
+For consistency with the `Joint` API, `file_size()` is aliased to `file_length()`.
 These are methods on instances of `Grid::File::Info`
 
 ## Note on Patches/Pull Requests
@@ -58,6 +62,12 @@ These are methods on instances of `Grid::File::Info`
 * Commit, do not mess with rakefile, version, or history.
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
+
+## Main authors
+This gem was originally created and maintained by John Nunemaker.
+Blake Carlson made important updates after John stopped mainting
+the code. I've taken Blake's fork, forked that and updated the code
+for Mongo driver 2.16.
 
 ## Copyright
 
