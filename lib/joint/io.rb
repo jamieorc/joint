@@ -2,7 +2,8 @@ require 'stringio'
 
 module Joint
   class IO
-    attr_accessor :name, :content, :type, :size
+    attr_accessor :name, :type, :size
+    attr_reader :content
 
     alias path name
 
