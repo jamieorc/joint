@@ -221,7 +221,6 @@ class JointSpec < JointBaseSpec
   describe "Updating existing attachment" do
     before do
       @doc = Asset.create(:file => @test1)
-      count = MongoMapper.database["fs.files"].count()
 
       assert_no_grid_difference do
         @doc.file = @test2
