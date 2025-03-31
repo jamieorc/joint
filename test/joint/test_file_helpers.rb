@@ -39,8 +39,6 @@ describe "FileHelpers" do
 
   describe ".type" do
     it "return type if Joint::IO instance" do
-      file = Joint::IO.new(:type => 'image/jpeg')
-
       assert_equal 'image/jpeg', Joint::FileHelpers.type(@image)
     end
 
